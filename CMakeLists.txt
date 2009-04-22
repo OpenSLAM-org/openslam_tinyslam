@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 2.6)
+project(CoreSLAM)
+
+subdirs(test)
+
+# Packaging info
+SET(CPACK_PACKAGE_NAME "CoreSLAM")
+SET(CPACK_PACKAGE_VENDOR "Mines ParisTech")
+
+# Packaging info
+SET(CPACK_GENERATOR ZIP)
+IF(UNIX)
+  SET(CPACK_GENERATOR ${CPACK_GENERATOR};STGZ;TGZ)
+ENDIF(UNIX)
+IF(LINUX)
+SET(CPACK_GENERATOR ${CPACK_GENERATOR};DEB;RPM)
+ENDIF(LINUX)
+IF(MSVC)
+  SET(CPACK_GENERATOR ${CPACK_GENERATOR};NSYS)
+ENDIF(MSVC)
+IF(APPLE)
+  SET(CPACK_GENERATOR ${CPACK_GENERATOR};PackageMaker)
+ENDIF(APPLE)
+
+INCLUDE(CPack)
+
+IF(CMAKE_HOST_UNIX)
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=pentium-m -mtune=pentium-m -pipe -fomit-frame-pointer -O3")
+ENDIF(CMAKE_HOST_UNIX)
+
+IF(MSVC)
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MD /arch:SSE2 /fp:fast")
+    #	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 /fp:fast")
+
+    # Optimization flags.
+    SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} /O2")
+ENDIF(MSVC)
+
+add_library(CoreSLAM CoreSLAM.c CoreSLAM_loop_closing.c CoreSLAM_state.c CoreSLAM_random.c CoreSLAM_ext.c CoreSLAM.h)
+

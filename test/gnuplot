@@ -1,0 +1,17 @@
+set term postscript
+
+set output 'test_lab_speed.eps'
+set title 'Mines Rover speed'
+set xlabel 'Time (100ms)'
+set ylabel 'Speed (m/s)'
+plot 'test_trajectory.dat' using 6 with lines title 'Measured by odometry', 'test_trajectory.dat' using 8 with lines title 'Measured by laser'
+
+set title 'Mines Rover yaw rate'
+set ylabel 'Yaw rate (deg/s)'
+set output 'test_lab_psidot.eps'
+plot 'test_trajectory.dat' using 7 with lines title 'Measured by odometry', 'test_trajectory.dat' using 9 with lines title 'Measured by laser'
+
+set title 'Mines Rover timestamps'
+set ylabel 'ms'
+set output 'test_lab_timestamps.eps'
+plot 'test_trajectory.dat' using 2 with lines
