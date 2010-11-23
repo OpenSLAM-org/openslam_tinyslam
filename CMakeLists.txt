@@ -25,7 +25,7 @@ ENDIF(APPLE)
 INCLUDE(CPack)
 
 IF(CMAKE_HOST_UNIX)
-    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=pentium-m -mtune=pentium-m -pipe -fomit-frame-pointer -O3")
+	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=core2 -mtune=generic -O2 -pipe -fomit-frame-pointer -O3")
 ENDIF(CMAKE_HOST_UNIX)
 
 IF(MSVC)
