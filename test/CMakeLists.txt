@@ -17,5 +17,3 @@ target_link_libraries(test_SDL CoreSLAM ${SDLlibs} ${libs})
 add_executable(test_loop_closing test_loop_closing.c)
 target_link_libraries(test_loop_closing CoreSLAM ${libs})
 
-add_executable(calcul_frequence calcul_frequence.c)
-target_link_libraries(calcul_frequence CoreSLAM ${libs})
